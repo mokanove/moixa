@@ -1,0 +1,18 @@
+# This file is an official configuration file example, which includes all the functions supported by Moixa. 
+# Of course, you don't need to configure all of them.
+[client]
+# Config for client.
+mixed-port = 10080 # It will automatically select the local proxy protocol, and generally you don't need to configure anything else.
+# options(If you have to choose an exception):
+# socks5-port = 10081
+# socks4-port = 10082
+# http-port = 10083
+manage-port = 10101 # This determines the port from which you manage proxy settings. 
+secret = "123456" # Sets a manager connection key, which allows you to remotely manage proxy settings.
+allow-lan = true # This option allows other devices to connect to this proxy, otherwise it only listens on 127.0.0.1 . true/false
+log-level = "info" # There are three error levels: information, warning, and error.
+mode = "GLOBLE" 
+#RULE: Matches based on the rule field
+#DIRECT: Directly forwards all traffic to the parent router without going through the proxy
+#GLOBLE: All connections go through the proxy
+[dns]
