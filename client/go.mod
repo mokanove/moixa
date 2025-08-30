@@ -1,4 +1,4 @@
-module Moixa
+module moixac
 
 go 1.24.6
 
