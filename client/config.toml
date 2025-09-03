@@ -19,11 +19,12 @@ mode = "GLOBLE"
 #Check whether the connection is successful, and automatically close the proxy if it fails.
 enable = true
 url = "https://s.867678.xyz/300.bin"
-interval = 300s
+interval = 300
 timeout = 5
+#The default unit is seconds.
 [dns]
 #If you do not configure any options in the DNS section, everything is handled by the upstream DNS, otherwise it is handled by the rules here.
-ns = 223.6.6.6
+ns = "223.6.6.6"
 #DNS for website and server node domain name resolution without proxy
 # ens = 8.8.8.8
 #Configuring this means using this DNS instead of the peer server's DNS. This is likely to cause DNS pollution when you visit the proxied website.
