@@ -15,4 +15,31 @@ mode = "GLOBLE"
 #RULE: Matches based on the rule field
 #DIRECT: Directly forwards all traffic to the parent router without going through the proxy
 #GLOBLE: All connections go through the proxy
+[check]
+#Check whether the connection is successful, and automatically close the proxy if it fails.
+enable = true
+url = "https://s.867678.xyz/300.bin"
+interval = 300s
+timeout = 5
 [dns]
+#If you do not configure any options in the DNS section, everything is handled by the upstream DNS, otherwise it is handled by the rules here.
+ns = 223.6.6.6
+#DNS for website and server node domain name resolution without proxy
+# ens = 8.8.8.8
+#Configuring this means using this DNS instead of the peer server's DNS. This is likely to cause DNS pollution when you visit the proxied website.
+# sns = 1.1.1.1
+#This option configures the DNS address of the domain name resolution server. If not configured, the recursive parent (NS area)
+[[proxies]]
+name = "proxy1"
+server = "jp-osa.867678.xyz"
+port = 108389
+password = "dPKbwL7OLRKyRejy80771wWEgeaZk-jlauYM"
+short-id = "d3"
+#Only the ixa protocol is supported. The configuration here can be copied to multiple nodes, but the names must be unique.
+[rule]
+whitelist = "https://ispip.clang.cn/all_cn.html"
+#A list of IP/domain names that do not go through the proxy, compatible with the txt format, one line per line.
+# blacklist = "https://ispip.clang.cn/mo_ipv6.txt"
+#These domain names/IPs will be denied proxying.
+
+#The following features are in experimental stage, please explore them on your own.
