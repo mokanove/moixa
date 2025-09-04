@@ -18,9 +18,16 @@ type Client struct {
 	LogLevel   string `toml:"log-level"`
 	Mode       string `toml:"mode"`
 }
+type Check struct {
+	Enable   bool   `toml:"enable"`
+	URL      string `toml:"url"`
+	Interval int    `toml:"interval"`
+	Timeout  int    `toml:"timeout"`
+}
 
 type config struct {
 	Client Client `toml:"client"`
+	Check  Check  `toml:"check"`
 }
 
 func main() {
@@ -48,7 +55,7 @@ func main() {
 	}
 
 	color.Green("Config loaded successfully!")
-	color.Green("Peer client:")
+	color.Green("Client part:")
 	fmt.Printf("IPv6 Support: %v\n", cfg.Client.IPv6)
 	fmt.Printf("Mixed Port: %d\n", cfg.Client.MixedPort)
 	fmt.Printf("Manage Port: %d\n", cfg.Client.ManagePort)
@@ -56,5 +63,9 @@ func main() {
 	fmt.Printf("Allow LAN: %v\n", cfg.Client.AllowLAN)
 	fmt.Printf("Log Level: %s\n", cfg.Client.LogLevel)
 	fmt.Printf("Mode: %s\n", cfg.Client.Mode)
-
+	color.Green("Connectivity check section:")
+	fmt.Printf("Enable: %v\n", cfg.Check.Enable)
+	fmt.Printf("URL: %s\n", cfg.Check.URL)
+	fmt.Printf("Interval: %d\n", cfg.Check.Interval)
+	fmt.Printf("Timeout: %d\n", cfg.Check.Timeout)
 }
