@@ -3,12 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
+	"os"
 
 	"github.com/BurntSushi/toml"
+	"github.com/fatih/color"
 )
 
 type Client struct {
+	IPv6       bool   `toml:"ipv6"`
 	MixedPort  int    `toml:"mixed-port"`
 	ManagePort int    `toml:"manage-port"`
 	Secret     string `toml:"secret"`
@@ -22,16 +24,32 @@ type config struct {
 }
 
 func main() {
-	fmt.Println("Moixa:A high-performance network proxy tool.")
+	lines := []string{
+		" __  __       _           ",
+		"|  \\/  | ___ (_)_  ____ _  ",
+		"| |\\/| |/ _ \\| \\ \\/ / _` |",
+		"| |  | | (_) | |>  < (_| |",
+		"|_|  |_|\\___/|_/_/\\_\\__,_|",
+	}
+	startColor := 19
+	for i, line := range lines {
+		colorCode := startColor + i*10
+		fmt.Printf("\033[38;5;%dm%s\033[0m\n", colorCode, line)
+	}
+	color.Cyan("A high-performance , security network proxy tool.")
 	configPath := flag.String("c", "./config.toml", "Path to config file")
 	flag.Parse()
 
 	var cfg config
 	if _, err := toml.DecodeFile(*configPath, &cfg); err != nil {
-		log.Fatalf("Failed to load config: %v", err)
+		color.Red("Failed to load config file!")
+		color.Red(err.Error())
+		os.Exit(0)
 	}
 
-	fmt.Println("Config loaded successfully:")
+	color.Green("Config loaded successfully!")
+	color.Green("Peer client:")
+	fmt.Printf("IPv6 Support: %v\n", cfg.Client.IPv6)
 	fmt.Printf("Mixed Port: %d\n", cfg.Client.MixedPort)
 	fmt.Printf("Manage Port: %d\n", cfg.Client.ManagePort)
 	fmt.Printf("Secret: %s\n", cfg.Client.Secret)
